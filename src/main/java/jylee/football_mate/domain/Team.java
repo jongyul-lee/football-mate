@@ -24,13 +24,19 @@ public class Team {
     @Column(name = "region")
     private String region;
 
+    @Column(name = "created_at")
+    private Timestamp created_at;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_user_id")
     private User created_user;
 
-    @Column(name = "created_at")
-    private Timestamp created_at;
-
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
+
+    //== 연관관계 메서드 ==//
+    public void setCreatedUser(User user){
+        this.created_user = user;
+        user.getCreatedTeams().add(this);
+    }
 }

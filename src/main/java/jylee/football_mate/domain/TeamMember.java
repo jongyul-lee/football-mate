@@ -37,4 +37,17 @@ public class TeamMember {
     @JoinColumn(name = "user_id")
     private User user;
 
+    //== 연관관계 메서드 ==//
+    public void setTeam(Team team){
+        this.team = team;
+
+        if(!team.getTeamMemberList().contains(this)){
+            team.getTeamMemberList().add(this);
+        }
+    }
+
+    public void setUser(User user){
+        this.user = user;
+        user.getTeamMemberList().add(this);
+    }
 }
