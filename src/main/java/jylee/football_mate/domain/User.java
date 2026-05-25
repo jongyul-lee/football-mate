@@ -31,7 +31,7 @@ public class User {
     private String phone;
 
     @Column(name = "profile_image")
-    private String profile_image_url;
+    private String profileImageUrl;
 
     @Column(name = "created_at")
     LocalDate createdAt;
@@ -55,7 +55,7 @@ public class User {
 
     //== 비즈니스 로직 ==//
     public void updateProfileImage(String url){
-        this.profile_image_url = url;
+        this.profileImageUrl = url;
     }
 
 }

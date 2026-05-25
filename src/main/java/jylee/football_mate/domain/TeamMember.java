@@ -3,9 +3,12 @@ package jylee.football_mate.domain;
 import jakarta.persistence.*;
 import jylee.football_mate.domain.enums.Position;
 import jylee.football_mate.domain.enums.TeamRole;
+import lombok.Getter;
+
 import java.time.LocalDate;
 
 @Entity
+@Getter
 @Table(name = "team_members")
 public class TeamMember {
 
