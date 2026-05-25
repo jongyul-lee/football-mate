@@ -11,6 +11,8 @@ import java.util.List;
 @Getter
 public class User {
 
+    protected User(){}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -32,11 +34,22 @@ public class User {
     private String profile_image_url;
 
     @Column(name = "created_at")
-    LocalDate created_at;
+    LocalDate createdAt;
 
     @OneToMany(mappedBy = "created_user")
     private List<Team> createdTeams = new ArrayList<Team>();
 
     @OneToMany(mappedBy = "user")
     private List<TeamMember> teamMemberList = new ArrayList<TeamMember>();
+
+    //== 생성 메서드 ==//
+    public static User createUser(String email, String password, String name, String phone){
+        User user = new User();
+        user.email = email;
+        user.password = password;
+        user.name = name;
+        user.phone = phone;
+        user.createdAt = LocalDate.now();
+        return user;
+    }
 }

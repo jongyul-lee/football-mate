@@ -9,6 +9,8 @@ import java.time.LocalDate;
 @Table(name = "team_members")
 public class TeamMember {
 
+    protected TeamMember(){}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_member_id")
@@ -26,7 +28,7 @@ public class TeamMember {
     private Integer uniformNumber;
 
     @Column(name = "joined_at")
-    private LocalDate joined_at;
+    private LocalDate joinedAt;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,6 +50,23 @@ public class TeamMember {
 
     public void setUser(User user){
         this.user = user;
-        user.getTeamMemberList().add(this);
+
+        if(!user.getTeamMemberList().contains(user)){
+            user.getTeamMemberList().add(this);
+        }
+    }
+
+    //== 생성 메서드 ==//
+    public static TeamMember createTeamMember(TeamRole role, Position position, Integer uniformNumber, User user, Team team){
+        TeamMember teamMember = new TeamMember();
+        teamMember.role = role;
+        teamMember.position = position;
+        teamMember.uniformNumber = uniformNumber;
+        teamMember.joinedAt = LocalDate.now();
+
+        teamMember.setUser(user);
+        teamMember.setTeam(team);
+
+        return teamMember;
     }
 }
