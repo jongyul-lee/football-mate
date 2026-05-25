@@ -36,7 +36,7 @@ public class User {
     @Column(name = "created_at")
     LocalDate createdAt;
 
-    @OneToMany(mappedBy = "created_user")
+    @OneToMany(mappedBy = "createdUser")
     private List<Team> createdTeams = new ArrayList<Team>();
 
     @OneToMany(mappedBy = "user")
@@ -52,4 +52,10 @@ public class User {
         user.createdAt = LocalDate.now();
         return user;
     }
+
+    //== 비즈니스 로직 ==//
+    public void updateProfileImage(String url){
+        this.profile_image_url = url;
+    }
+
 }

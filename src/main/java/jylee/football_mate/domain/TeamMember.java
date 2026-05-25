@@ -51,12 +51,12 @@ public class TeamMember {
     public void setUser(User user){
         this.user = user;
 
-        if(!user.getTeamMemberList().contains(user)){
+        if(!user.getTeamMemberList().contains(this)){
             user.getTeamMemberList().add(this);
         }
     }
 
-    //== 생성 메서드 ==//
+    //== 생성 메서드 및 가입(?) 로직==//
     public static TeamMember createTeamMember(TeamRole role, Position position, Integer uniformNumber, User user, Team team){
         TeamMember teamMember = new TeamMember();
         teamMember.role = role;
@@ -68,5 +68,18 @@ public class TeamMember {
         teamMember.setTeam(team);
 
         return teamMember;
+    }
+
+    //== 비즈니스 로직 ==//
+    public void changeRole(TeamRole role){
+        this.role = role;
+    }
+
+    public void changeUniformNumber(Integer number){
+        this.uniformNumber = number;
+    }
+
+    public void changePosition(Position position){
+        this.position = position;
     }
 }

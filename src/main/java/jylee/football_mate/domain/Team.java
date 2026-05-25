@@ -50,8 +50,13 @@ public class Team {
         team.description = description;
         team.region = region;
         team.createdAt = LocalDate.now();
-        team.createdUser = createdUser;
+        team.setCreatedUser(createdUser);
         return team;
     }
 
+    //== 비즈니스 로직 ==//
+    public void addTeamMember(TeamMember teamMember){
+        this.teamMemberList.add(teamMember);
+        teamMember.setTeam(this);
+    }
 }
